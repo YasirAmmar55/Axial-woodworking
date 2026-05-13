@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Axial Woodworking | Bespoke Kitchen Atelier</title>
+    <!-- Google Fonts + simple reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+    <!-- Jobber external assets: CSS + JS (placed early for reliable load) -->
+    <link rel="stylesheet" href="https://d3ey4dbjkt2f6s.cloudfront.net/assets/external/work_request_embed.css" media="screen" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            color: #EAEAEA;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* header / navigation - dark theme */
+        header {
+            background: #000000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(0px);
+            border-bottom: 1px solid #2A2A2A;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4AF37;
+            letter-spacing: -0.02em;
+        }
+        .logo span {
+            color: #EAEAEA;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #DDDDDD;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #D4AF37;
+        }
+
+        /* mobile toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #D4AF37;
+        }
+
+        /* section styling */
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid #1E1E1E;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #F5F5F5;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 3px;
+            background: #D4AF37;
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        .hero {
+            background: linear-gradient(115deg, #0B0B0B 0%, #111111 100%);
+            padding: 5rem 0;
+            border-bottom: none;
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+        .hero-content {
+            flex: 1.2;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+            color: #FFFFFF;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #B0B0B0;
+            margin-bottom: 2rem;
+        }
+        .hero-accent {
+            color: #D4AF37;
+        }
+        .btn {
+            display: inline-block;
+            background: #D4AF37;
+            color: #0A0A0A;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #D4AF37;
+            color: #D4AF37;
+            margin-left: 1rem;
+        }
+        .btn-outline:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+        .btn:hover {
+            background: #B8952E;
+            transform: translateY(-2px);
+            color: #0A0A0A;
+        }
+        .hero-image {
+            flex: 0.9;
+            background: #2A2418;
+            border-radius: 28px;
+            height: 320px;
+            background-image: url('RD_LaurelWay_0111_F-35c7768324394f139425937f2527ca92.jpg');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.6);
+            border: 1px solid #3A3A3A;
+        }
+
+        /* services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .service-card {
+            background: #111111;
+            padding: 2rem 1.5rem;
+            border-radius: 24px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+            border: 1px solid #2A2A2A;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: #D4AF37;
+            box-shadow: 0 20px 25px -12px rgba(0,0,0,0.5);
+            background: #161616;
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #E8E8E8;
+        }
+        .service-card p {
+            color: #AAAAAA;
+        }
+
+        /* projects gallery */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: #0F0F0F;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #2A2A2A;
+            transition: 0.2s;
+        }
+        .project-card:hover {
+            border-color: #D4AF37;
+        }
+        .project-img {
+            height: 220px;
+            background-color: #1F1B14;
+            background-size: cover;
+            background-position: center;
+        }
+        .project-card h4 {
+            font-size: 1.3rem;
+            margin: 1rem 1rem 0.5rem;
+            color: #F0F0F0;
+        }
+        .project-card p {
+            margin: 0 1rem 1.2rem;
+            color: #B9B9B9;
+        }
+
+        /* catalog table */
+        .catalog-list {
+            background: #0C0C0C;
+            border-radius: 28px;
+            border: 1px solid #2A2A2A;
+            overflow-x: auto;
+        }
+        .catalog-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+        }
+        .catalog-table th, .catalog-table td {
+            text-align: left;
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid #262626;
+        }
+        .catalog-table th {
+            background-color: #151515;
+            font-weight: 600;
+            color: #D4AF37;
+        }
+        .catalog-table tr:last-child td {
+            border-bottom: none;
+        }
+        .catalog-table td {
+            color: #CFCFCF;
+        }
+
+        /* Contact & Jobber Form Section - redesigned for seamless embed */
+        .contact-form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+        }
+        .contact-info {
+            flex: 1;
+            background: #0E0E0E;
+            padding: 2rem;
+            border-radius: 28px;
+            border: 1px solid #2A2A2A;
+        }
+        .contact-info p {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #C8C8C8;
+        }
+        .jobber-form-wrapper {
+            flex: 1.5;
+            background: #0C0C0C;
+            padding: 2rem;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border: 1px solid #2A2A2A;
+            transition: all 0.2s;
+        }
+        .jobber-form-wrapper h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.2rem;
+            color: #D4AF37;
+            font-size: 1.6rem;
+        }
+        /* Jobber embed container styling — to match dark mode */
+        #jobber-embed-container {
+            margin-top: 0.5rem;
+        }
+        /* Ensure iframe and embedded content respect dark background / visibility */
+        .jobber-form-wrapper iframe,
+        .jobber-embed-root {
+            background: #111111 !important;
+            border-radius: 20px;
+        }
+        /* Make sure any text inside jobber form is legible (Jobber CSS mostly handles it) */
+        .jobber-form-wrapper * {
+            max-width: 100%;
+        }
+
+        footer {
+            background: #020202;
+            color: #8E8E8E;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        @media (max-width: 800px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 0.8rem;
+                display: inline-block;
+            }
+            .hero-grid .btn-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+            }
+            .container {
+                padding: 0 20px;
+            }
+            section {
+                padding: 3rem 0;
+            }
+            .contact-form-row {
+                flex-direction: column;
+            }
+        }
+
+        /* Additional inline style for better jobber visibility */
+        .jobber-form-wrapper .work-request-embed {
+            background: #0C0C0C;
+        }
+        .jobber-form-wrapper input, 
+        .jobber-form-wrapper select, 
+        .jobber-form-wrapper textarea {
+            background: #1A1A1A;
+            border-color: #3a3a3a;
+            color: #F0F0F0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">AXIAL<span> Woodworking</span></div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#catalog" class="nav-link">Catalog</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Hero / Home section -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Precision & Soul <span class="hero-accent">for your Kitchen</span></h1>
+                <p>Axial Woodworking , handcrafted cabinetry and timeless kitchen designs. Where function meets artisanal legacy</p>
+                <div class="btn-group">
+                    <a href="#contact" class="btn">Request a Quote</a>
+                    <a href="#catalog" class="btn btn-outline">Explore Catalog</a>
+                </div>
+            </div>
+            <div class="hero-image"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Axial Woodworking</h2>
+            <div style="max-width: 850px; margin: 0 auto; text-align: center; font-size: 1.1rem; line-height: 1.6;">
+                <p style="margin-bottom: 1rem; color: #CCCCCC;">Founded with a passion for wood and honest craftsmanship, <strong style="color:#D4AF37;">Axial Woodworking</strong> merges modern engineering with old-world joinery. Each kitchen we create is a statement — tailored to your space, habits, and aesthetic.</p>
+                <p style="color: #B0B0B0;">From solid wood countertops to dovetailed drawers, we work with domestic hardwoods and sustainable materials. Based in the heart of the design district, we serve homeowners, architects, and builders who demand excellence.</p>
+                <div style="margin: 2rem 0; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <div><strong style="color:#D4AF37;">✦ 12+ years</strong><br><span style="color:#AAA;">experience</span></div>
+                    <div><strong style="color:#D4AF37;">✦ 500+ kitchens</strong><br><span style="color:#AAA;">crafted</span></div>
+                    <div><strong style="color:#D4AF37;">✦ 100% custom</strong><br><span style="color:#AAA;">design</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card"><div class="service-icon">🪚</div><h3>Custom Cabinetry</h3><p>Fully bespoke kitchen cabinets, pantries, and built-ins with premium joinery.</p></div>
+                <div class="service-card"><div class="service-icon">📐</div><h3>Kitchen Planning</h3><p>3D modeling, space optimization, and ergonomic layouts from consultation.</p></div>
+                <div class="service-card"><div class="service-icon">🔨</div><h3>Refinishing & Restoration</h3><p>Bring vintage kitchens back to life while preserving original character.</p></div>
+                <div class="service-card"><div class="service-icon">🌳</div><h3>Solid Surface & Wood Tops</h3><p>Butcher block, walnut, oak, and exotic wood countertops.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Recent Projects</h2>
+            <div class="project-grid">
+                <div class="project-card"><div class="project-img" style="background-image: url('BlackCabinets.jpg');"></div><h4>Midtown Modern</h4><p>Walnut cabinetry + bronze hardware, open shelving concept.</p></div>
+                <div class="project-card"><div class="project-img" style="background-image: url('RD_LaurelWay_0111_F-35c7768324394f139425937f2527ca92.jpg');"></div><h4>Heritage Farmhouse</h4><p>Painted shaker style, custom range hood and marble inlay.</p></div>
+                <div class="project-card"><div class="project-img" style="background-image: url('encinitas-modern-connection-kw-designs-img~9ab1a63e0dc1cb6b_9-3487-1-4a67dc3.jpg');"></div><h4>SoHo Loft</h4><p>Matte black & oak, handle-less push-to-open system.</p></div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog">
+        <div class="container">
+            <h2 class="section-title">Material Catalog</h2>
+            <div class="catalog-list">
+                <table class="catalog-table">
+                    <thead>
+                        <tr><th>Wood Type</th><th>Finish Options</th><th>Lead Time</th><th>Price / sq.ft</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>American White Oak</td><td>Natural, Whitewash, Smoked</td><td>3 weeks</td><td>$28</td></tr>
+                        <tr><td>Black Walnut</td><td>Matte Oil, Satin Lacquer</td><td>4 weeks</td><td>$42</td></tr>
+                        <tr><td>Cherry Wood</td><td>Classic Amber, Clear Coat</td><td>3 weeks</td><td>$35</td></tr>
+                        <tr><td>Maple (Hard Rock)</td><td>Natural, Bleached, Custom stain</td><td>2 weeks</td><td>$30</td></tr>
+                        <tr><td>European Ash</td><td>Wire-brushed, grey</td><td>3 weeks</td><td>$32</td></tr>
+                    </tbody>
+                </table>
+                <p style="padding: 1rem 1.2rem; background: #0E0E0E; border-top: 1px solid #262626; font-size: 0.9rem; color:#AAAAAA;">* All dimensions custom. Hardware, dovetail drawers, soft-close included. Request full catalog PDF via contact.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Jobber Integration Section (replaced old form with Jobber embed) -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact & Order</h2>
+            <div class="contact-form-row">
+                <div class="contact-info">
+                    <h3 style="font-family: 'Playfair Display'; margin-bottom: 1rem; color: #D4AF37;">Let's craft together</h3>
+                    <p>📍 142 Woodcraft Lane, Portland, OR 97214</p>
+                    <p>📞 +1 (503) 889-AXIAL (29425)</p>
+                    <p>✉️ studio@axialwoodworking.com</p>
+                    <p>🕒 Mon-Fri: 9am – 6pm | Sat by appointment</p>
+                    <div style="margin-top: 1.5rem;">
+                        <p style="color:#D4AF37;"><strong>✨ Powered by Jobber</strong></p>
+                        <p style="color:#AAAAAA;">Use the embedded form to send a detailed request. Our team will respond within 24 hours. Secure & instant.</p>
+                    </div>
+                </div>
+                <div class="jobber-form-wrapper">
+                    <h3>Request a quote / Work order</h3>
+                    <!-- Jobber embed container: exact snippet with clienthub_id & form_url -->
+                    <div id="jobber-embed-root">
+                        <div id="e0fc02f1-9e62-458c-853f-d104843228bd-4660652"></div>
+                        <script src="https://d3ey4dbjkt2f6s.cloudfront.net/assets/static_link/work_request_embed_snippet.js" clienthub_id="e0fc02f1-9e62-458c-853f-d104843228bd-4660652" form_url="https://clienthub.getjobber.com/client_hubs/e0fc02f1-9e62-458c-853f-d104843228bd/public/work_request/embedded_work_request_form?form_id=4660652"></script>
+                    </div>
+                    <p style="font-size: 0.8rem; margin-top: 1rem; color: #9a9a9a; text-align: center;">All submissions go directly to our Jobber CRM – we’ll get back to you promptly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Axial Woodworking — Bespoke Kitchen Atelier. Black Edition | Handcrafted with integrity.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">📍 Showroom visits by appointment | Sustainable Forestry practices</p>
+    </div>
+</footer>
+
+<script>
+        // Mobile menu toggle
+    const toggleBtn = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    }
+
+    // Active link highlight
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-link');
+
+    function updateActiveLink() {
+        let scrollPos = window.scrollY + 120;
+        sections.forEach(sec => {
+            const id = sec.getAttribute('id');
+            if (!id) return;
+            const secTop = sec.offsetTop;
+            const secBottom = secTop + sec.offsetHeight;
+            if (scrollPos >= secTop && scrollPos < secBottom) {
+                navItems.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
+
+    // Smooth scroll for all anchor links, plus close mobile menu
+    document.querySelectorAll('.nav-link, .btn, .btn-outline').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const hash = this.getAttribute('href');
+            if (hash && hash.startsWith('#') && hash !== '#') {
+                e.preventDefault();
+                const targetId = hash.substring(1);
+                const targetElem = document.getElementById(targetId);
+                if (targetElem) {
+                    targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (navLinks.classList.contains('show')) navLinks.classList.remove('show');
+                    history.pushState(null, null, hash);
+                }
+            }
+        });
+    });
+
+    // Ensure that Jobber's embedded script loads gracefully and doesn't conflict
+    // Optional: notify console that Jobber form is active. Also, because external script loads asynchronously,
+    // we don't need to override any existing behavior; it automatically renders the work request form.
+    // For perfect dark background compatibility, we can add a tiny style observer (optional)
+    window.addEventListener('load', function() {
+        // Small adjustment: attempt to add a class to any jobber iframe / container to improve contrast
+        const jobberContainer = document.getElementById('e0fc02f1-9e62-458c-853f-d104843228bd-4660652');
+        if (jobberContainer) {
+            // For better UX, ensure any inner content respects border radius (no action needed)
+            console.log("Jobber Work Request Embed loaded successfully.");
+        }
+        // Additional fix for possible iframe styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .work-request-embed, .jobber-embedded-form {
+                background: #0C0C0C !important;
+                border-radius: 24px;
+            }
+            .work-request-embed input, .work-request-embed textarea, .work-request-embed select {
+                background: #1E1E1E !important;
+                border: 1px solid #3E3E3E !important;
+                color: #EEEEEE !important;
+            }
+            .work-request-embed label {
+                color: #D4AF37 !important;
+            }
+            .work-request-embed button[type="submit"] {
+                background: #D4AF37 !important;
+                color: #0A0A0A !important;
+                border-radius: 40px !important;
+            }
+        `;
+        document.head.appendChild(style);
+    });
+    
+    
+    console.log("Axial Woodworking with Jobber integration active — all inquiries go through embedded work request form.");
+</script>
+</body>
+</html>
